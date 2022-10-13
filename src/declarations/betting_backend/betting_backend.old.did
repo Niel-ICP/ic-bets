@@ -1,0 +1,31 @@
+type UserBet = 
+ record {
+   amountBetted: nat;
+   optionPicked: nat;
+   winningsCollected: bool;
+ };
+type Bet = 
+ record {
+   betsClosed: bool;
+   betsOnA: nat;
+   betsOnB: nat;
+   name: text;
+   optionA: text;
+   optionB: text;
+   totalBets: nat;
+   winner: nat;
+ };
+service : {
+  calculateWinnings: (principal, nat) -> (nat) query;
+  collectWinnings: (nat) -> (text);
+  createBet: (text, text, text) -> () oneway;
+  decideWinner: (nat, nat) -> (text);
+  mintICB: () -> (text);
+  placeBet: (nat, nat, nat) -> (text);
+  setReferee: (principal, bool) -> (text);
+  viewBalance: (principal) -> (nat) query;
+  viewBet: (nat) -> (Bet) query;
+  viewMyBet: () -> (UserBet);
+  viewUser: (principal, nat) -> (UserBet) query;
+  withdrawBet: (nat) -> (text);
+}
